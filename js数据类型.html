@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>js数据类型</title>
+	</head>
+
+	<body>
+		<p id="p1"></p>
+		<p id="p2"></p>
+		<p id="p3"></p>
+		<p id="demo"></p>
+		<script>
+			var perY = {
+				name: "danity",
+				age: 25,
+				sex: "female",
+				<!--对象方法-->
+				fun1: function(hobbies, interests) {
+					return this.name + "喜欢" + hobbies + "和" + interests;
+				},
+				fun2: function() {
+					return this.age + " " + this.sex;
+				}
+			}
+			// 对象方法调用
+			document.getElementById("p1").innerHTML = perY.name + "今年" + perY.age + "岁了";
+			document.getElementById("p2").innerHTML = perY.fun1("看书", "听音乐");
+			document.getElementById("p3").innerHTML = perY.fun2();
+			// 在 HTML 中, 所有全局变量都会成为 window 变量。
+			myFunction();
+			document.getElementById("demo").innerHTML =
+				"我可以显示 " + window.carName;
+
+			function myFunction() {
+				carName = "Volvo";
+			}
+		</script>
+
+	</body>
+
+</html>

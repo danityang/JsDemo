@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>HtmlDom</title>
+	</head>
+
+	<body onload="checkCookie()">
+		<!--当网页被加载时，浏览器会创建页面的文档对象模型（Document Object Model）。
+			此时可以用document对象做一系列操作
+		-->
+		<p class="intro">你好世界!</p>
+		<button id="btn">Button</button>
+		<div id="div1">
+			<h1>标题</h1>
+			<p>段落</p>
+			<p id="pd"></p>
+		</div>
+		<script>
+			var x = document.getElementById("div1");
+			var y = x.getElementsByTagName("h1");
+			document.write(y[0].innerHTML);
+			x = document.getElementsByClassName("intro");
+			document.write("<p>文本来自 class 为 intro 段落: " + x[0].innerHTML + "</p>");
+			// button点击事件的另一种写法
+			document.getElementById("btn").onclick = function() {
+				showDate();
+			}
+
+			function showDate() {
+				document.getElementById("pd").innerHTML = Date();
+			}
+			// onload 和 onunload 事件会在用户进入或离开页面时被触发。
+			// onload 事件可用于检测访问者的浏览器类型和浏览器版本，并基于这些信息来加载网页的正确版本。
+			//onload 和 onunload 事件可用于处理 cookie。
+			function checkCookie() {
+				if(navigator.cookieEnabled) {
+					alert("cookie可用")
+				} else {
+					alert("cookie不可用")
+				}
+			}
+
+			function mOver(obj) {
+				obj.innerHTML = "Thank You"
+			}
+
+			function mOut(obj) {
+				obj.innerHTML = "Mouse Over Me"
+			}
+		</script>
+		<div onmouseover="mOver(this)" onmouseout="mOut(this)" style="background-color:#000fff;width:120px;height:20px;padding:40px; color: white;">Mouse Over Me</div>
+	</body>
+
+</html>

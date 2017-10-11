@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Dom元素</title>
+	</head>
+
+	<body>
+		<div id="div1">
+			<p id="p1">段落1</p>
+			<p id="p2">段落2</p>
+		</div>
+
+		<script>
+			// 添加一个新元素
+			var para = document.createElement("p");
+			var node = document.createTextNode("新段落");
+			para.appendChild(node);
+			var e = document.getElementById("div1");
+			e.appendChild(para);
+			// 删除元素
+			var parent = document.getElementById("div1");
+			var child = document.getElementById("p1");
+			parent.removeChild(child);
+		</script>
+	</body>
+
+</html>

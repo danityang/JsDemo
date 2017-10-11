@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>js函数</title>
+	</head>
+
+	<body>
+		<p id="p1"></p>
+		<p id="p2"></p>
+		<p id="p3"></p>
+		<p id="p4"></p>
+		<p id="p5"></p>
+		<script>
+			// 变量也可作为一个函数使用
+			var x = function(a, b) {
+				return a * b;
+			}
+			var y = x(3, 4);
+			document.write(y + "<br />");
+			// 构造函数
+			var myFunction = new Function("a", "b", "return a * b");
+			var z = myFunction(4, 3);
+			document.write(z + "<br />");
+			// 自调用函数
+			/* 自调用表达式会自动调用。
+			如果表达式后面紧跟 () ，则会自动调用。
+			不能自调用声明的函数。
+			通过添加括号，来说明它是一个函数表达式 */
+			(function() {
+				document.getElementById("p1").innerHTML = "p1: 自调用函数";
+			})();
+			// toString() 将函数作为一个字符串返回
+			document.getElementById("p2").innerHTML = "p2: "+myFunction.toString();
+			// JavaScript 函数有个内置的对象 arguments 对象
+			function mFunc() {
+				// 通过arguments找出参数中的最大值
+				var i, max = arguments[0];
+				if(arguments.length < 2) {
+					return max;
+				} else {
+					for(var k = 0; k < arguments.length; k++) {
+						if(arguments[k] > max) {
+							max = arguments[k];
+						}
+					}
+					return max;
+				}
+			}
+			document.getElementById("p3").innerHTML = "p3: "+mFunc(23, 56, 900, 34, 2, 3);
+			// 在 JavaScript 中, 函数是对象。JavaScript 函数有它的属性和方法。
+			// call() 和 apply() 是预定义的函数方法。 两个方法可用于调用函数，两个方法的第一个参数必须是对象本身。
+			var mObj; 
+			// call()运用
+			function mFunc1(a,b){
+				return a*b;
+			}
+			// call()用于普通方法中
+			mObj = mFunc1.call(mObj, 10, 10);
+			document.getElementById("p4").innerHTML = "p4: "+mObj;
+			
+			var mObj2, mArray = [3, 9]
+			// apply()运用
+			function mFunc2(a,b){
+				return a*b*10;
+			}
+			// apply()用于数组
+			mObj2 = mFunc2.apply(mObj2, mArray);
+			document.getElementById("p5").innerHTML = "p5: "+mObj2;
+		</script>
+	</body>
+
+</html>

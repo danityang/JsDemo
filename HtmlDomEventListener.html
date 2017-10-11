@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>HtmlDomEventListener</title>
+		<style>
+			div {
+				background-color: coral;
+				border: 1px solid;
+				padding: 50px;
+			}
+			
+			#myDIV {
+				background-color: coral;
+				border: 1px solid;
+				padding: 50px;
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p id="p1">段落1</p>
+		<p id="p2">段落2</p>
+		<p id="p3">段落3</p>
+		<p id="p4">段落4</p>
+		<p>实例演示了在添加不同事件监听时，冒泡与捕获的不同。</p>
+		<div id="myDiv">
+			<p id="myP">点击段落，我是冒泡。</p>
+		</div><br>
+		<div id="myDiv2">
+			<p id="myP2">点击段落，我是捕获。 </p>
+		</div>
+		<div id="myDIV"> div 元素添加了 onmousemove 事件句柄，鼠标在桔红色的框内移动时会显示随机数。
+			<p>点击按钮移除 DIV 的事件句柄。</p>
+			<button onclick="removeHandler()" id="myBtn">移除事件监听</button>
+		</div>
+		<p id="p5"></p>
+		<script>
+			document.getElementById("p1").addEventListener("click", function() {
+				alert("被点击")
+			})
+			// 可以添加多个EventListener
+			var v = document.getElementById("p2");
+			v.addEventListener("click", function() {
+				this.innerHTML = "被点击2"
+			})
+			v.addEventListener("click", function() {
+				this.innerHTML = "被点击3"
+			})
+			// 传递参数
+			document.getElementById("p3").addEventListener("click", function() {
+				postPar(this, 5, 8)
+			});
+
+			function postPar(o, i1, i2) {
+				o.innerHTML = i1 * i2
+			}
+			// 在 window 对象中使用 addEventListener() 方法。
+			window.addEventListener("resize", function() {
+				document.getElementById("p4").innerHTML = Math.random()
+			});
+			// 事件冒泡或事件捕获
+			/*
+			 事件传递有两种方式：冒泡与捕获。
+			事件传递定义了元素事件触发的顺序。 如果你将 <p> 元素插入到 <div> 元素中，用户点击 <p> 元素, 哪个元素的 "click" 事件先被触发呢？
+			在 冒泡 中，内部元素的事件会先被触发，然后再触发外部元素，即： <p> 元素的点击事件先触发，然后会触发 <div> 元素的点击事件。
+			在 捕获 中，外部元素的事件会先被触发，然后才会触发内部元素的事件，即： <div> 元素的点击事件先触发 ，然后再触发 <p> 元素的点击事件。
+			addEventListener() 方法可以指定 "useCapture" 参数来设置传递类型：
+			TODO 默认值为 false, 即冒泡传递，当值为 true 时, 事件使用捕获传递。
+			 * */
+			document.getElementById("myP").addEventListener("click", function() {
+				alert("你点击了 P 元素!");
+			}, false);
+			document.getElementById("myDiv").addEventListener("click", function() {
+				alert(" 你点击了 DIV 元素 !");
+			}, false);
+			document.getElementById("myP2").addEventListener("click", function() {
+				alert("你点击了 P2 元素!");
+			}, true);
+			document.getElementById("myDiv2").addEventListener("click", function() {
+				alert("你点击了 DIV2 元素 !");
+			}, true);
+			
+			// removeEventListener() 方法
+			document.getElementById("myDIV").addEventListener("mousemove", myFunction);
+
+			function myFunction() {
+				document.getElementById("p5").innerHTML = Math.random();
+			}
+
+			function removeHandler() {
+				document.getElementById("myDIV").removeEventListener("mousemove", myFunction);
+			}
+		</script>
+	</body>
+
+</html>
